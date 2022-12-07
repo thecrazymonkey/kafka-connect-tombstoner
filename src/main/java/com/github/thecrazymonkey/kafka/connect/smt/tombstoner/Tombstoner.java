@@ -82,7 +82,7 @@ public abstract class Tombstoner<R extends ConnectRecord<R>> implements Transfor
           record.kafkaPartition(),
           record.keySchema(),
           record.key(),
-          record.valueSchema(),
+          null,
           null,
           record.timestamp()
       );    
