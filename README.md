@@ -20,3 +20,5 @@ transforms.tombstoner.condition="$.headers[?(@.operation == 'DELETE')]"
 ```
 
 Inspired by Confluent® `Filter` SMT
+
+TODO - headers support?
