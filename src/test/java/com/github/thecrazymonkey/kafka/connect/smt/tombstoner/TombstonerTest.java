@@ -46,7 +46,7 @@ public class TombstonerTest {
       }},
       null,
       new HashMap<String, Object>(){{
-        put("field", "field");
+        put("field", "DELETE");
         put( "f1",
           new HashMap<String, Object>(){{
             put("field", "false");
@@ -105,7 +105,7 @@ public class TombstonerTest {
       }},
       valueschema,
       new Struct(valueschema){{
-        put("field", "field");
+        put("field", "DELETE");
         put( "f1",
           new HashMap<String, Object>() {{
             put("field", new Struct(nestedStructValueSchema) {{
@@ -164,6 +164,15 @@ public class TombstonerTest {
   }
 
   @Test
+  public void insertTombstoneOnValueWithoutSchemaSimple() {
+    xform.configure(new HashMap<String, Object>(){{
+      put(Tombstoner.TOMBSTONER_FIELD, "$[?(@.field == 'DELETE')]");
+    }});
+
+    final SinkRecord transformedRecord = xform.apply(recordWithoutSchema);
+    assertNull("Tombstone record not inserted.", transformedRecord.value());
+  }
+  @Test
   public void noInsertTombstoneOnValueWithoutSchema() {
     xform.configure(new HashMap<String, Object>(){{
       put(Tombstoner.TOMBSTONER_FIELD, "$.f1.[?(@.field == 'DELETE')]");
@@ -217,6 +226,15 @@ public class TombstonerTest {
   public void insertTombstoneOnValueWithSchema() {
     xform.configure(new HashMap<String, Object>(){{
       put(Tombstoner.TOMBSTONER_FIELD, "$.f1[?(@.field.f3 == 'DELETE')]");
+    }});
+
+    final SinkRecord transformedRecord = xform.apply(recordWithSchema);
+    assertNull("Tombstone record not inserted.", transformedRecord.value());
+  }
+  @Test
+  public void insertTombstoneOnValueWithSchemaSimple() {
+    xform.configure(new HashMap<String, Object>(){{
+      put(Tombstoner.TOMBSTONER_FIELD, "$[?(@.field == 'DELETE')]");
     }});
 
     final SinkRecord transformedRecord = xform.apply(recordWithSchema);
