@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.github.thecrazymonkey.kafka.connect.smt.tombstoner;
+package com.github.thecrazymonkey.kafka.connect.smt;
 
-import org.apache.kafka.common.cache.Cache;
 import org.apache.kafka.common.config.ConfigDef;
 import org.apache.kafka.common.config.ConfigException;
 import org.apache.kafka.common.config.ConfigDef.Validator;

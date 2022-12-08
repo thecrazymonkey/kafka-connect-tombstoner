@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.thecrazymonkey.kafka.connect.smt.tombstoner;
+package com.github.thecrazymonkey.kafka.connect.smt;
 
 import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.data.SchemaBuilder;
@@ -22,6 +22,8 @@ import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.junit.After;
 import org.junit.Test;
+
+import com.github.thecrazymonkey.kafka.connect.smt.Tombstoner;
 
 import java.util.HashMap;
 import static org.junit.Assert.*;
