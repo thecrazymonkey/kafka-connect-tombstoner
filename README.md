@@ -21,4 +21,8 @@ transforms.tombstoner.condition="$.headers[?(@.operation == 'DELETE')]"
 
 Inspired by Confluent® `Filter` SMT
 
+Dependency (when deploying you need to supply the JsonPath jar file along with the SMT):
+https://github.com/json-path/JsonPath
+
+
 TODO - headers support?
