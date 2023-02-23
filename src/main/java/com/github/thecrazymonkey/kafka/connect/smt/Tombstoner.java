@@ -44,7 +44,7 @@ public abstract class Tombstoner<R extends ConnectRecord<R>> implements Transfor
   public static final String TOMBSTONER_FIELD = "tombstoner.condition";
 
   public static final String OVERVIEW_DOC =
-    "Create Tobstone record based on the input criteria";
+    "Create Tombstone record based on the input criteria";
 
   private static final Validator Validate_JSONPath = (name, value) -> {
     try {
@@ -139,13 +139,16 @@ public abstract class Tombstoner<R extends ConnectRecord<R>> implements Transfor
         extractMapFromStruct(requireStruct(operatingValue(record), PURPOSE_WITH_SCHEMA),
         schema);
     try {
+      // run jsonpath to get a list of matches
       List<?> tombstoneField = fieldName.read(valueMap, 
                         Configuration.defaultConfiguration().addOptions(Option.ALWAYS_RETURN_LIST));
-    if (tombstoneField.size() != 0)
+    // we just need to know there was a match
+    if (!tombstoneField.isEmpty())
       return true;
-      // ignore exceptions in spec or search
     } catch (PathNotFoundException e) {
+      // ignore exceptions in spec or search
     } catch (InvalidPathException e) {
+      // ignore exceptions in spec or search
     }
   return false;
   }
@@ -153,6 +156,7 @@ public abstract class Tombstoner<R extends ConnectRecord<R>> implements Transfor
   @SuppressWarnings("unchecked")
   private Object extractMapFromStruct(Object value, Schema schema)
   {
+    // convert connect structures to something the jsonpath check understands
     if (schema.type().isPrimitive())
       return value;
     switch (schema.type()) {

@@ -23,8 +23,6 @@ import org.apache.kafka.connect.sink.SinkRecord;
 import org.junit.After;
 import org.junit.Test;
 
-import com.github.thecrazymonkey.kafka.connect.smt.Tombstoner;
-
 import java.util.HashMap;
 import static org.junit.Assert.*;
 
