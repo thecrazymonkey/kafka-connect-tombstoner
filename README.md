@@ -6,6 +6,9 @@ Kafka Connect SMT to replace the incoming message with a tombstone (null value) 
 
 Please follow the instructions provided in https://docs.confluent.io/platform/current/connect/transforms/custom.html#custom-transformations
 
+Dependency (when deploying you need to supply the JsonPath jar file along with the SMT):
+https://github.com/json-path/JsonPath
+
 ## Properties:
 
 |Name|Description|Type|Default|Importance|
@@ -25,11 +28,6 @@ transforms.tombstoner.type=com.github.thecrazymonkey.kafka.connect.smt.Tombstone
 transforms.tombstoner.condition="$.headers[?(@.operation == 'DELETE')]"
 ```
 
-Inspired by Confluent® `Filter` SMT
-
-Dependency (when deploying you need to supply the JsonPath jar file along with the SMT):
-https://github.com/json-path/JsonPath
-
 ## Releasing
 
 Change the version
@@ -42,5 +40,7 @@ Build the package
 ```bash
 mvn clean package
 ```
+
+Inspired by Confluent® `Filter` SMT
 
 TODO - headers support?
